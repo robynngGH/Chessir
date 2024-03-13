@@ -1,21 +1,19 @@
 ﻿using Chessir.ajedrez;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Chessir.gui
 {
     public partial class FormJugar : Form
     {
+        private int turno = 1;
         int tiempo = 0, incremento = 0;
         int id_Blanco = 0, id_Negro = 0;
         String username_Blanco = "", username_Negro = "";
+        int id_partida = 0; //lo recibirá del form de inicio de partida
+        private string modo_juego = "";
+
+        public void recibirIDPartida(int id_partida) { this.id_partida = id_partida; }
 
         private void FormJugar_Load(object sender, EventArgs e)
         {
@@ -23,11 +21,12 @@ namespace Chessir.gui
             Tablero.jugadorActual = ColorPieza.BLANCO;
         }
         public FormJugar() { }
-        public FormJugar(int id_Blanco, string username_Blanco, int id_Negro, string username_Negro, int tiempo, int incremento) //recibe los valores del form inicial (quien usa la aplicación en primer plano)
+        public FormJugar(int id_partida, int id_Blanco, string username_Blanco, int id_Negro, string username_Negro, int tiempo, int incremento) //recibe los valores del form inicial (quien usa la aplicación en primer plano)
         {
-            this.id_Blanco=id_Blanco; this.id_Negro = id_Negro;
-            this.username_Blanco=username_Blanco; this.username_Negro = username_Negro;
-            this.tiempo=tiempo; this.incremento=incremento;
+            this.id_partida = id_partida;
+            this.id_Blanco = id_Blanco; this.id_Negro = id_Negro;
+            this.username_Blanco = username_Blanco; this.username_Negro = username_Negro;
+            this.tiempo = tiempo; this.incremento = incremento;
             InitializeComponent();
             labelJugadorBlanco.Text = username_Blanco;
             timerBlanco.tiempo = tiempo; timerNegro.tiempo = tiempo; //tiempo disponible para jugar e incremento de tiempo en segundos por jugada realizada
@@ -37,6 +36,13 @@ namespace Chessir.gui
             timerBlanco.codigoExt = new EventHandler(derrotaBlanco);
             timerNegro.codigoExt = new EventHandler(derrotaNegro);
             timerBlanco.Iniciar();
+
+            //para pasar el modo de juego en caso de revancha
+            if (tiempo == 1800) modo_juego = "Clásico";
+            else if (tiempo == 900) modo_juego = "Acelerado";
+            else if (tiempo == 600) modo_juego = "Rápido";
+            else if (tiempo == 300) modo_juego = "Blitz";
+            else if (tiempo == 120) modo_juego = "Bullet";
         }
         Tablero tablero;
 
@@ -49,7 +55,7 @@ namespace Chessir.gui
             else if (labelEstadoPartida.Text.Equals("RENDICIÓN"))
                 motivo = "Rendición";
             else motivo = "Timeout";
-            FormFinalPartida formFinalPartida = new FormFinalPartida(id_Negro, username_Negro, motivo, "NRey");
+            FormFinalPartida formFinalPartida = new FormFinalPartida(id_partida, id_Negro, username_Negro, motivo, "NRey");
             formFinalPartida.ShowDialog();
         }
         //función para acabar la partida por timeout del jugador blanco
@@ -61,7 +67,7 @@ namespace Chessir.gui
             else if (labelEstadoPartida.Text.Equals("RENDICIÓN"))
                 motivo = "Rendición";
             else motivo = "Timeout";
-            FormFinalPartida formFinalPartida = new FormFinalPartida(id_Blanco, username_Blanco, motivo, "BRey");
+            FormFinalPartida formFinalPartida = new FormFinalPartida(id_partida, id_Blanco, username_Blanco, motivo, "BRey");
             formFinalPartida.ShowDialog();
         }
 
@@ -70,7 +76,7 @@ namespace Chessir.gui
             DialogResult resultado = MessageBox.Show("¿Seguro que desea rendirse?",
                 username_Negro, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-            if(resultado == DialogResult.Yes)
+            if (resultado == DialogResult.Yes)
             {
                 labelEstadoPartida.Text = "RENDICIÓN";
                 Tablero.Window.labelEstadoPartida.ForeColor = System.Drawing.Color.Firebrick;
@@ -88,7 +94,7 @@ namespace Chessir.gui
                 labelEstadoPartida.Text = "RENDICIÓN";
                 Tablero.Window.labelEstadoPartida.ForeColor = System.Drawing.Color.Firebrick;
                 timerBlanco.Parar(); timerNegro.Pausar();
-            }           
+            }
         }
 
         public int getId_Blanco()
@@ -109,5 +115,25 @@ namespace Chessir.gui
         }
         public int getTiempo() { return tiempo; }
         public int getIncremento() { return incremento; }
+        public int getTurno() { return turno; }
+
+        //termina la partida sin ganador si no se encuentra una forma de ganar
+        private void buttonTablas_Click(object sender, EventArgs e)
+        {
+            DialogResult resultado = MessageBox.Show("¿Aceptas la proposición de tablas?",
+                "Tablas", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (resultado == DialogResult.Yes)
+            {
+                labelEstadoPartida.Text = "TABLAS";
+                timerBlanco.Pausar(); timerNegro.Pausar(); //no causa la derrota de ninguno
+                FormFinalPartida formFinalPartida = new FormFinalPartida(id_partida, 0, null, "Tablas", "Tablas");
+                formFinalPartida.ShowDialog();
+            }
+        }
+
+        public void setTurno(int turno) { this.turno = turno; }
+        public int getIDPartida() { return id_partida; }
+        public string getModoJuego() { return modo_juego; }
     }
 }

@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 
 namespace Chessir.ajedrez
 {
     public enum TipoPieza { Peon, Torre, Caballo, Alfil, Reina, Rey, Vacio }
     public struct Pieza
     {
-        public bool primerMovimiento {  get; set; } //determina si es el primer movimiento de un peón
+        public bool primerMovimiento { get; set; } //determina si es el primer movimiento de un peón
         public bool mueveDosCasillas;
         public TipoPieza tipopieza { get; private set; }
         public ColorPieza color;
@@ -29,7 +25,7 @@ namespace Chessir.ajedrez
         }
 
         //método para el cambio de pieza cuando el peon llega al final del tablero
-        public Pieza(string pieza, Tile casilla):this(TipoPieza.Reina)
+        public Pieza(string pieza, Tile casilla) : this(TipoPieza.Reina)
         {
             //dependiendo de la primera letra del archivo de imagen (N negro)
             color = pieza.First() == 'N' ? ColorPieza.NEGRO : ColorPieza.BLANCO;
@@ -54,7 +50,7 @@ namespace Chessir.ajedrez
             Movimiento movimiento = new Movimiento(piezaCasilla);
             casillasAtaque = new Tile[movimiento.movimientosDisponibles.Length];
 
-            for (int i = 0;i<movimiento.movimientosDisponibles.Length;i++)
+            for (int i = 0; i < movimiento.movimientosDisponibles.Length; i++)
             {
                 if (movimiento.movimientosDisponibles[i] == null)
                     continue;

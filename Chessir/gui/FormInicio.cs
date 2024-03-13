@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Chessir.gui
@@ -25,6 +19,12 @@ namespace Chessir.gui
             labelDiaSemana.Text = textInfo.ToTitleCase(labelDiaSemana.Text);
             labelDiaActual.Text = DateTime.Now.ToString("dd 'de' MMMM");
             labelUsuario.Text = "Usuario:\n" + username;
+        }
+
+        private void buttonAyuda_Click(object sender, EventArgs e)
+        {
+            FormInicial fi = Application.OpenForms.OfType<FormInicial>().FirstOrDefault(); //para llamar a funciones del form que abarca todo
+            fi.abrirFormEnPanel(new FormAyuda());
         }
     }
 }

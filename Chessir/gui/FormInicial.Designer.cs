@@ -28,15 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormInicial));
             this.panelSuperior = new System.Windows.Forms.Panel();
             this.labelUsuarioSuperior = new System.Windows.Forms.Label();
             this.labelChessir = new System.Windows.Forms.Label();
             this.pictureBoxIcono = new System.Windows.Forms.PictureBox();
             this.pictureBoxMinimizar = new System.Windows.Forms.PictureBox();
-            this.pictureBoxMaximizar = new System.Windows.Forms.PictureBox();
             this.pictureBoxCerrar = new System.Windows.Forms.PictureBox();
-            this.pictureBoxRestaurar = new System.Windows.Forms.PictureBox();
             this.panelInferior = new System.Windows.Forms.Panel();
             this.buttonGestion = new System.Windows.Forms.Button();
             this.buttonSalir = new System.Windows.Forms.Button();
@@ -45,25 +44,24 @@
             this.buttonPerfil = new System.Windows.Forms.Button();
             this.buttonInicio = new System.Windows.Forms.Button();
             this.panelContenedor = new System.Windows.Forms.Panel();
+            this.timerCargando = new System.Windows.Forms.Timer(this.components);
+            this.buttonCerrarSesion = new System.Windows.Forms.Button();
             this.panelSuperior.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcono)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMinimizar)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMaximizar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCerrar)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxRestaurar)).BeginInit();
             this.panelInferior.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelSuperior
             // 
             this.panelSuperior.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(68)))), ((int)(((byte)(78)))));
+            this.panelSuperior.Controls.Add(this.buttonCerrarSesion);
             this.panelSuperior.Controls.Add(this.labelUsuarioSuperior);
             this.panelSuperior.Controls.Add(this.labelChessir);
             this.panelSuperior.Controls.Add(this.pictureBoxIcono);
             this.panelSuperior.Controls.Add(this.pictureBoxMinimizar);
-            this.panelSuperior.Controls.Add(this.pictureBoxMaximizar);
             this.panelSuperior.Controls.Add(this.pictureBoxCerrar);
-            this.panelSuperior.Controls.Add(this.pictureBoxRestaurar);
             this.panelSuperior.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelSuperior.Location = new System.Drawing.Point(0, 0);
             this.panelSuperior.Name = "panelSuperior";
@@ -108,26 +106,13 @@
             this.pictureBoxMinimizar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBoxMinimizar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.pictureBoxMinimizar.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxMinimizar.Image")));
-            this.pictureBoxMinimizar.Location = new System.Drawing.Point(1501, 4);
+            this.pictureBoxMinimizar.Location = new System.Drawing.Point(1531, 4);
             this.pictureBoxMinimizar.Name = "pictureBoxMinimizar";
             this.pictureBoxMinimizar.Size = new System.Drawing.Size(25, 25);
             this.pictureBoxMinimizar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxMinimizar.TabIndex = 2;
             this.pictureBoxMinimizar.TabStop = false;
             this.pictureBoxMinimizar.Click += new System.EventHandler(this.pictureBoxMinimizar_Click);
-            // 
-            // pictureBoxMaximizar
-            // 
-            this.pictureBoxMaximizar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBoxMaximizar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBoxMaximizar.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxMaximizar.Image")));
-            this.pictureBoxMaximizar.Location = new System.Drawing.Point(1532, 4);
-            this.pictureBoxMaximizar.Name = "pictureBoxMaximizar";
-            this.pictureBoxMaximizar.Size = new System.Drawing.Size(25, 25);
-            this.pictureBoxMaximizar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBoxMaximizar.TabIndex = 1;
-            this.pictureBoxMaximizar.TabStop = false;
-            this.pictureBoxMaximizar.Click += new System.EventHandler(this.pictureBoxMaximizar_Click);
             // 
             // pictureBoxCerrar
             // 
@@ -141,19 +126,6 @@
             this.pictureBoxCerrar.TabIndex = 0;
             this.pictureBoxCerrar.TabStop = false;
             this.pictureBoxCerrar.Click += new System.EventHandler(this.pictureBoxCerrar_Click);
-            // 
-            // pictureBoxRestaurar
-            // 
-            this.pictureBoxRestaurar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBoxRestaurar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBoxRestaurar.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxRestaurar.Image")));
-            this.pictureBoxRestaurar.Location = new System.Drawing.Point(1532, 4);
-            this.pictureBoxRestaurar.Name = "pictureBoxRestaurar";
-            this.pictureBoxRestaurar.Size = new System.Drawing.Size(25, 25);
-            this.pictureBoxRestaurar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBoxRestaurar.TabIndex = 3;
-            this.pictureBoxRestaurar.TabStop = false;
-            this.pictureBoxRestaurar.Click += new System.EventHandler(this.pictureBoxRestaurar_Click);
             // 
             // panelInferior
             // 
@@ -221,7 +193,7 @@
             this.buttonRepeticiones.Name = "buttonRepeticiones";
             this.buttonRepeticiones.Size = new System.Drawing.Size(300, 122);
             this.buttonRepeticiones.TabIndex = 3;
-            this.buttonRepeticiones.Text = "Repeticiones";
+            this.buttonRepeticiones.Text = "Informes";
             this.buttonRepeticiones.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.buttonRepeticiones.UseVisualStyleBackColor = false;
             this.buttonRepeticiones.Visible = false;
@@ -263,6 +235,7 @@
             this.buttonPerfil.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.buttonPerfil.UseVisualStyleBackColor = false;
             this.buttonPerfil.Visible = false;
+            this.buttonPerfil.Click += new System.EventHandler(this.buttonPerfil_Click);
             // 
             // buttonInicio
             // 
@@ -292,6 +265,27 @@
             this.panelContenedor.Size = new System.Drawing.Size(1600, 915);
             this.panelContenedor.TabIndex = 2;
             // 
+            // timerCargando
+            // 
+            this.timerCargando.Enabled = true;
+            this.timerCargando.Interval = 2000;
+            this.timerCargando.Tick += new System.EventHandler(this.timerCargando_Tick);
+            // 
+            // buttonCerrarSesion
+            // 
+            this.buttonCerrarSesion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonCerrarSesion.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(68)))), ((int)(((byte)(78)))));
+            this.buttonCerrarSesion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonCerrarSesion.Font = new System.Drawing.Font("Nirmala UI", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonCerrarSesion.ForeColor = System.Drawing.Color.White;
+            this.buttonCerrarSesion.Location = new System.Drawing.Point(1397, 4);
+            this.buttonCerrarSesion.Name = "buttonCerrarSesion";
+            this.buttonCerrarSesion.Size = new System.Drawing.Size(112, 28);
+            this.buttonCerrarSesion.TabIndex = 25;
+            this.buttonCerrarSesion.Text = "Cerrar sesión";
+            this.buttonCerrarSesion.UseVisualStyleBackColor = false;
+            this.buttonCerrarSesion.Click += new System.EventHandler(this.buttonCerrarSesion_Click);
+            // 
             // FormInicial
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -301,6 +295,7 @@
             this.Controls.Add(this.panelInferior);
             this.Controls.Add(this.panelSuperior);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormInicial";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Chessir!";
@@ -308,9 +303,7 @@
             this.panelSuperior.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxIcono)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMinimizar)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMaximizar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCerrar)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxRestaurar)).EndInit();
             this.panelInferior.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -322,9 +315,7 @@
         private System.Windows.Forms.Panel panelInferior;
         private System.Windows.Forms.Panel panelContenedor;
         private System.Windows.Forms.PictureBox pictureBoxCerrar;
-        private System.Windows.Forms.PictureBox pictureBoxRestaurar;
         private System.Windows.Forms.PictureBox pictureBoxMinimizar;
-        private System.Windows.Forms.PictureBox pictureBoxMaximizar;
         private System.Windows.Forms.PictureBox pictureBoxIcono;
         private System.Windows.Forms.Label labelChessir;
         private System.Windows.Forms.Label labelUsuarioSuperior;
@@ -334,6 +325,8 @@
         private System.Windows.Forms.Button buttonGestion;
         private System.Windows.Forms.Button buttonRepeticiones;
         private System.Windows.Forms.Button buttonSalir;
+        private System.Windows.Forms.Timer timerCargando;
+        private System.Windows.Forms.Button buttonCerrarSesion;
     }
 }
 

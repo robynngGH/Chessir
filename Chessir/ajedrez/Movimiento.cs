@@ -1,11 +1,7 @@
-﻿using Chessir.gui;
-using System;
+﻿using Chessir.dao;
+using Chessir.dto;
+using Chessir.gui;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization.Formatters;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace Chessir.ajedrez
 {
@@ -16,6 +12,7 @@ namespace Chessir.ajedrez
         public MovimientoDePieza?[] movimientosDisponibles;
         MovimientoDePieza? movimientoAnterior;
         int movimiento;
+        Tile casillaPulsada;
         int dir { get { return piezaCasilla.pieza.color == ColorPieza.NEGRO ? 1 : -1; } }
 
         public Movimiento()
@@ -23,18 +20,99 @@ namespace Chessir.ajedrez
             movimientoAnterior = new MovimientoDePieza(1, 1);
         }
 
-        public Movimiento(Tile piezaCasilla):this()
+        public Movimiento(Tile piezaCasilla) : this()
         {
             this.piezaCasilla = piezaCasilla;
             movimientosDisponibles = Movimientos();
         }
 
+        public Tile getPiezaCasilla() { return piezaCasilla; }
+
+        //crea un DTO de todo el turno a partir de llamar a Tablero.Window y los métodos de formJugar
+        private DTOTurno creaDTOTurno()
+        {
+            int id_partida = Tablero.Window.getIDPartida();
+
+            int id_jugador = 0;
+            if (Tablero.jugadorActual == ColorPieza.BLANCO)
+                id_jugador = Tablero.Window.getId_Blanco();
+            else if (Tablero.jugadorActual == ColorPieza.NEGRO)
+                id_jugador = Tablero.Window.getId_Negro();
+
+            int turno = Tablero.Window.getTurno();
+
+            string pieza = piezaCasilla.pieza.tipopieza.ToString();
+            //pieza = pieza.Remove(0, 1);
+
+            string casilla_origen = "";
+            //para localizar la primera letra de casilla (A4, D6, C7...)
+            switch (piezaCasilla.localizacion.x)
+            {
+                case 0: casilla_origen = "A"; break;
+                case 1: casilla_origen = "B"; break;
+                case 2: casilla_origen = "C"; break;
+                case 3: casilla_origen = "D"; break;
+                case 4: casilla_origen = "E"; break;
+                case 5: casilla_origen = "F"; break;
+                case 6: casilla_origen = "G"; break;
+                case 7: casilla_origen = "H"; break;
+                default: break;
+            }
+            switch (piezaCasilla.localizacion.y)
+            {
+                case 0: casilla_origen = casilla_origen + "8"; break;
+                case 1: casilla_origen = casilla_origen + "7"; break;
+                case 2: casilla_origen = casilla_origen + "6"; break;
+                case 3: casilla_origen = casilla_origen + "5"; break;
+                case 4: casilla_origen = casilla_origen + "4"; break;
+                case 5: casilla_origen = casilla_origen + "3"; break;
+                case 6: casilla_origen = casilla_origen + "2"; break;
+                case 7: casilla_origen = casilla_origen + "1"; break;
+                default: break;
+            }
+
+            string casilla_destino = "";
+            switch (casillaPulsada.localizacion.x)
+            {
+                case 0: casilla_destino = "A"; break;
+                case 1: casilla_destino = "B"; break;
+                case 2: casilla_destino = "C"; break;
+                case 3: casilla_destino = "D"; break;
+                case 4: casilla_destino = "E"; break;
+                case 5: casilla_destino = "F"; break;
+                case 6: casilla_destino = "G"; break;
+                case 7: casilla_destino = "H"; break;
+                default: break;
+            }
+            switch (casillaPulsada.localizacion.y)
+            {
+                case 0: casilla_destino = casilla_destino + "8"; break;
+                case 1: casilla_destino = casilla_destino + "7"; break;
+                case 2: casilla_destino = casilla_destino + "6"; break;
+                case 3: casilla_destino = casilla_destino + "5"; break;
+                case 4: casilla_destino = casilla_destino + "4"; break;
+                case 5: casilla_destino = casilla_destino + "3"; break;
+                case 6: casilla_destino = casilla_destino + "2"; break;
+                case 7: casilla_destino = casilla_destino + "1"; break;
+                default: break;
+            }
+
+            string pieza_comida = casillaPulsada.pieza.tipopieza.ToString();
+
+            string peon_convertido = null; //solo se recibe no nulo si se hace el DAO desde SeleccionPieza
+
+            DTOTurno dtoTurno = new DTOTurno(id_partida, id_jugador, turno, pieza, casilla_origen, casilla_destino, pieza_comida, peon_convertido);
+            return dtoTurno;
+
+        }
+
         public bool esMovimientoDisponible(Tile casillaPulsada)
         {
+            this.casillaPulsada = casillaPulsada;
             interfazMovimientos(false);
-            
+
             //recorremos los movimientos disponibles para encontrar la casilla pulsada
-            for (int i = 0;i<movimientosDisponibles.Length;i++)
+            for (int i = 0; i < movimientosDisponibles.Length; i++)
             {
                 if (movimientosDisponibles[i] == null)
                     continue;
@@ -44,13 +122,30 @@ namespace Chessir.ajedrez
                         continue;
                     Tablero.movimientosAnteriores.Add(new TableroAnterior(piezaCasilla.pieza, piezaCasilla.localizacion, (MovimientoDePieza)movimientosDisponibles[i], casillaPulsada.pieza, i));
                     piezaCasilla.pieza.primerMovimiento = false;
+                    DAOTurno daoTurno = new DAOTurno();
+                    daoTurno.registrarTurno(creaDTOTurno());
                     casillaPulsada.asignarPieza(piezaCasilla.pieza);
                     piezaCasilla.asignarPieza(new Pieza(TipoPieza.Vacio));
                     if (!FormSeleccionPieza.esperando)
                     {
-                        if (Tablero.jugadorActual == ColorPieza.BLANCO) { Tablero.Window.timerBlanco.Pausar(); Tablero.Window.timerNegro.Iniciar(); Tablero.Window.buttonRendirseB.Enabled = false; Tablero.Window.buttonRendirseN.Enabled = true; }
-                        else { Tablero.Window.timerNegro.Pausar(); Tablero.Window.timerBlanco.Iniciar(); Tablero.Window.buttonRendirseN.Enabled = false; Tablero.Window.buttonRendirseB.Enabled = true; }
+                        if (Tablero.jugadorActual == ColorPieza.BLANCO)
+                        {
+                            Tablero.Window.timerBlanco.Pausar();
+                            Tablero.Window.timerNegro.Iniciar();
+                            Tablero.Window.buttonRendirseB.Enabled = false;
+                            Tablero.Window.buttonRendirseN.Enabled = true;
+                        }
+                        else
+                        {
+                            Tablero.Window.timerNegro.Pausar();
+                            Tablero.Window.timerBlanco.Iniciar();
+                            Tablero.Window.buttonRendirseN.Enabled = false;
+                            Tablero.Window.buttonRendirseB.Enabled = true;
+                        }
+
                         Tablero.jugadorActual = Tablero.jugadorActual == ColorPieza.BLANCO ? ColorPieza.NEGRO : ColorPieza.BLANCO;
+                        Tablero.Window.setTurno(Tablero.Window.getTurno() + 1);
+                        Tablero.Window.labelTurno.Text = "Turno " + Tablero.Window.getTurno();
                         Pieza.actualizarAtaques();
                         if (reyAtacado())
                         {
@@ -72,7 +167,7 @@ namespace Chessir.ajedrez
 
         public void interfazMovimientos(bool mostrar)
         {
-            for (int i = 0;i<movimientosDisponibles.Length;i++)
+            for (int i = 0; i < movimientosDisponibles.Length; i++)
             {
                 if (movimientosDisponibles[i] == null)
                     continue;
@@ -125,6 +220,7 @@ namespace Chessir.ajedrez
                     if ((piezaCasilla.getY == 1 && piezaCasilla.pieza.color == ColorPieza.BLANCO) || (piezaCasilla.getY == 6 && piezaCasilla.pieza.color == ColorPieza.NEGRO))
                     {
                         FormSeleccionPieza seleccionPieza = new FormSeleccionPieza(casillaPulsada);
+                        seleccionPieza.recibeDeMovimiento(piezaCasilla);
                         seleccionPieza.Show();
                     }
                     break;
@@ -175,7 +271,7 @@ namespace Chessir.ajedrez
         {
             List<Tile> piezaCasillas = Tablero.getCasillasConPiezas(Tablero.jugadorActual);
 
-            for (int i = 0; i < piezaCasillas.Count;i++)
+            for (int i = 0; i < piezaCasillas.Count; i++)
             {
                 piezaCasilla = piezaCasillas[i];
                 movimientosDisponibles = Movimientos();
@@ -188,7 +284,7 @@ namespace Chessir.ajedrez
             {
                 Tablero.Window.timerBlanco.Parar(); //lleva a la derrota
                 Tablero.Window.timerNegro.Pausar();
-            }                
+            }
             else
             {
                 Tablero.Window.timerNegro.Parar(); //lleva a la derrota
@@ -208,7 +304,7 @@ namespace Chessir.ajedrez
         }
         public bool estaElReyASalvo()
         {
-            for (int i = 0;i<movimientosDisponibles.Length;i++)
+            for (int i = 0; i < movimientosDisponibles.Length; i++)
             {
                 if (movimientosDisponibles[i] == null)
                     continue;
@@ -269,7 +365,7 @@ namespace Chessir.ajedrez
                     bool puedeEnrocarse(int dir) //comprueba si el enroque es posible
                     {
                         int rango = dir == 1 ? 3 : 4;
-                        for (int i = 1;i<rango;i++)
+                        for (int i = 1; i < rango; i++)
                         {
                             if (estaOcupada(piezaCasilla.getY, piezaCasilla.getX + i * dir) ||
                                 (Tablero.casillas[piezaCasilla.getY, piezaCasilla.getX + i * dir].casillaAtaque != ColorPieza.NINGUNO))
@@ -284,14 +380,14 @@ namespace Chessir.ajedrez
                     break;
                 case TipoPieza.Peon:
                     movimientos = new MovimientoDePieza?[6];
-                    movimientos[0] = noEstaOcupada(piezaCasilla.localizacion.y+1*dir, piezaCasilla.localizacion.x) ? destino(1 * dir, 0) : movimientoAnterior = null;
+                    movimientos[0] = noEstaOcupada(piezaCasilla.localizacion.y + 1 * dir, piezaCasilla.localizacion.x) ? destino(1 * dir, 0) : movimientoAnterior = null;
                     if (movimientoAnterior != null) //para el primer movimiento del peón
                         movimientos[1] = noEstaOcupada(piezaCasilla.getY + 2 * dir, piezaCasilla.getX) && piezaCasilla.pieza.primerMovimiento ? destino(2 * dir, 0) : null;
                     movimientos[2] = destino(dir, 1);
                     movimientos[3] = destino(dir, -1);
                     //para el caso de que se pueda comer una ficha
-                    movimientos[4] = esPeonRival(piezaCasilla.getY, piezaCasilla.getX+1) && !estaOcupada(piezaCasilla.getY+dir, piezaCasilla.getX+1) ? destino(dir, 1) : null;
-                    movimientos[5] = esPeonRival(piezaCasilla.getY, piezaCasilla.getX - 1) && !estaOcupada(piezaCasilla.getY+dir, piezaCasilla.getX-1) ? destino(dir, -1) : null;
+                    movimientos[4] = esPeonRival(piezaCasilla.getY, piezaCasilla.getX + 1) && !estaOcupada(piezaCasilla.getY + dir, piezaCasilla.getX + 1) ? destino(dir, 1) : null;
+                    movimientos[5] = esPeonRival(piezaCasilla.getY, piezaCasilla.getX - 1) && !estaOcupada(piezaCasilla.getY + dir, piezaCasilla.getX - 1) ? destino(dir, -1) : null;
                     break;
             }
             return movimientos;
@@ -305,7 +401,7 @@ namespace Chessir.ajedrez
         }
 
         //método para asignar movimientos a piezas como el rey o el caballo
-        MovimientoDePieza? destino(int y , int x)
+        MovimientoDePieza? destino(int y, int x)
         {
             int yLocalizacion = piezaCasilla.localizacion.y + y;
             int xLocalizacion = piezaCasilla.localizacion.x + x;
@@ -331,9 +427,9 @@ namespace Chessir.ajedrez
         {
             int torreDir = lineaRecta ? 0 : 1;
             int alfilDir = lineaRecta ? 1 : -1;
-            
-            for (int i = 1;i<9;i++)
-                movimientos[movimiento] = destinoLineal(-i, i*alfilDir*torreDir);
+
+            for (int i = 1; i < 9; i++)
+                movimientos[movimiento] = destinoLineal(-i, i * alfilDir * torreDir);
 
             movimientoAnterior = new MovimientoDePieza(1, 1);
             for (int i = 1; i < 9; i++)
@@ -353,7 +449,8 @@ namespace Chessir.ajedrez
     public struct MovimientoDePieza
     {
         public int y, x;
-        public MovimientoDePieza(int y, int x) {
+        public MovimientoDePieza(int y, int x)
+        {
             this.y = y;
             this.x = x;
         }

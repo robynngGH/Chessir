@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormGestion));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -61,10 +63,13 @@
             this.label14 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.checkBoxActivo = new System.Windows.Forms.CheckBox();
+            this.buttonPerfil = new System.Windows.Forms.Button();
+            this.timerCargando = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // label1
             // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Source Code Pro Black", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
@@ -76,6 +81,7 @@
             // 
             // label2
             // 
+            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.White;
@@ -88,6 +94,7 @@
             // 
             // label3
             // 
+            this.label3.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Nirmala UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.White;
@@ -99,6 +106,7 @@
             // 
             // label4
             // 
+            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.White;
@@ -110,6 +118,7 @@
             // 
             // textBoxUsername
             // 
+            this.textBoxUsername.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.textBoxUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxUsername.Location = new System.Drawing.Point(221, 223);
             this.textBoxUsername.Name = "textBoxUsername";
@@ -119,6 +128,7 @@
             // 
             // textBoxPassword
             // 
+            this.textBoxPassword.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.textBoxPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxPassword.Location = new System.Drawing.Point(220, 285);
             this.textBoxPassword.Name = "textBoxPassword";
@@ -129,6 +139,7 @@
             // 
             // label5
             // 
+            this.label5.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.White;
@@ -140,6 +151,7 @@
             // 
             // textBoxRepitePassword
             // 
+            this.textBoxRepitePassword.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.textBoxRepitePassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxRepitePassword.Location = new System.Drawing.Point(221, 347);
             this.textBoxRepitePassword.Name = "textBoxRepitePassword";
@@ -150,6 +162,7 @@
             // 
             // label6
             // 
+            this.label6.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.White;
@@ -161,6 +174,7 @@
             // 
             // checkBoxEsAdmin
             // 
+            this.checkBoxEsAdmin.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.checkBoxEsAdmin.AutoSize = true;
             this.checkBoxEsAdmin.Font = new System.Drawing.Font("Arial", 10.8F);
             this.checkBoxEsAdmin.ForeColor = System.Drawing.Color.White;
@@ -173,6 +187,7 @@
             // 
             // buttonCrearUsuario
             // 
+            this.buttonCrearUsuario.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.buttonCrearUsuario.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(68)))), ((int)(((byte)(78)))));
             this.buttonCrearUsuario.Enabled = false;
             this.buttonCrearUsuario.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -188,6 +203,7 @@
             // 
             // labelPasswordNoCoincide
             // 
+            this.labelPasswordNoCoincide.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.labelPasswordNoCoincide.AutoSize = true;
             this.labelPasswordNoCoincide.Font = new System.Drawing.Font("Arial", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelPasswordNoCoincide.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(74)))), ((int)(((byte)(74)))));
@@ -200,6 +216,7 @@
             // 
             // labelUsernameCorto
             // 
+            this.labelUsernameCorto.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.labelUsernameCorto.AutoSize = true;
             this.labelUsernameCorto.Font = new System.Drawing.Font("Arial", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelUsernameCorto.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(74)))), ((int)(((byte)(74)))));
@@ -212,6 +229,7 @@
             // 
             // label7
             // 
+            this.label7.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Nirmala UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.White;
@@ -223,6 +241,7 @@
             // 
             // label8
             // 
+            this.label8.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.Color.White;
@@ -234,6 +253,7 @@
             // 
             // comboBoxUsuariosModificar
             // 
+            this.comboBoxUsuariosModificar.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.comboBoxUsuariosModificar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBoxUsuariosModificar.FormattingEnabled = true;
             this.comboBoxUsuariosModificar.Location = new System.Drawing.Point(786, 222);
@@ -244,6 +264,7 @@
             // 
             // labelUsernameCortoModificar
             // 
+            this.labelUsernameCortoModificar.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.labelUsernameCortoModificar.AutoSize = true;
             this.labelUsernameCortoModificar.Font = new System.Drawing.Font("Arial", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelUsernameCortoModificar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(74)))), ((int)(((byte)(74)))));
@@ -256,6 +277,7 @@
             // 
             // labelPasswordNoCoincideModificar
             // 
+            this.labelPasswordNoCoincideModificar.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.labelPasswordNoCoincideModificar.AutoSize = true;
             this.labelPasswordNoCoincideModificar.Font = new System.Drawing.Font("Arial", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelPasswordNoCoincideModificar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(74)))), ((int)(((byte)(74)))));
@@ -268,6 +290,7 @@
             // 
             // buttonModificarUsuario
             // 
+            this.buttonModificarUsuario.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.buttonModificarUsuario.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(68)))), ((int)(((byte)(78)))));
             this.buttonModificarUsuario.Enabled = false;
             this.buttonModificarUsuario.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -283,6 +306,7 @@
             // 
             // checkBoxEsAdminModificar
             // 
+            this.checkBoxEsAdminModificar.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.checkBoxEsAdminModificar.AutoSize = true;
             this.checkBoxEsAdminModificar.Enabled = false;
             this.checkBoxEsAdminModificar.Font = new System.Drawing.Font("Arial", 10.8F);
@@ -296,6 +320,7 @@
             // 
             // textBoxRepitePasswordModificar
             // 
+            this.textBoxRepitePasswordModificar.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.textBoxRepitePasswordModificar.Enabled = false;
             this.textBoxRepitePasswordModificar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxRepitePasswordModificar.Location = new System.Drawing.Point(748, 408);
@@ -307,6 +332,7 @@
             // 
             // label11
             // 
+            this.label11.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.ForeColor = System.Drawing.Color.White;
@@ -318,6 +344,7 @@
             // 
             // textBoxPasswordModificar
             // 
+            this.textBoxPasswordModificar.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.textBoxPasswordModificar.Enabled = false;
             this.textBoxPasswordModificar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxPasswordModificar.Location = new System.Drawing.Point(749, 347);
@@ -329,6 +356,7 @@
             // 
             // label12
             // 
+            this.label12.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.ForeColor = System.Drawing.Color.White;
@@ -340,6 +368,7 @@
             // 
             // textBoxUsernameModificar
             // 
+            this.textBoxUsernameModificar.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.textBoxUsernameModificar.Enabled = false;
             this.textBoxUsernameModificar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxUsernameModificar.Location = new System.Drawing.Point(749, 285);
@@ -350,6 +379,7 @@
             // 
             // label13
             // 
+            this.label13.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label13.ForeColor = System.Drawing.Color.White;
@@ -361,6 +391,7 @@
             // 
             // comboBoxUsuariosEliminar
             // 
+            this.comboBoxUsuariosEliminar.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.comboBoxUsuariosEliminar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBoxUsuariosEliminar.FormattingEnabled = true;
             this.comboBoxUsuariosEliminar.Location = new System.Drawing.Point(1318, 223);
@@ -371,6 +402,7 @@
             // 
             // label9
             // 
+            this.label9.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.Color.White;
@@ -382,6 +414,7 @@
             // 
             // label10
             // 
+            this.label10.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Nirmala UI", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.ForeColor = System.Drawing.Color.White;
@@ -393,6 +426,7 @@
             // 
             // buttonEliminarUsuario
             // 
+            this.buttonEliminarUsuario.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.buttonEliminarUsuario.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(68)))), ((int)(((byte)(78)))));
             this.buttonEliminarUsuario.Enabled = false;
             this.buttonEliminarUsuario.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -408,6 +442,7 @@
             // 
             // label14
             // 
+            this.label14.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(68)))), ((int)(((byte)(78)))));
             this.label14.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label14.ForeColor = System.Drawing.Color.White;
@@ -418,6 +453,7 @@
             // 
             // label15
             // 
+            this.label15.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label15.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(68)))), ((int)(((byte)(78)))));
             this.label15.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label15.ForeColor = System.Drawing.Color.White;
@@ -428,6 +464,7 @@
             // 
             // checkBoxActivo
             // 
+            this.checkBoxActivo.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.checkBoxActivo.AutoSize = true;
             this.checkBoxActivo.Enabled = false;
             this.checkBoxActivo.Font = new System.Drawing.Font("Arial", 10.8F);
@@ -439,12 +476,36 @@
             this.checkBoxActivo.Text = "¿Está activo?";
             this.checkBoxActivo.UseVisualStyleBackColor = true;
             // 
+            // buttonPerfil
+            // 
+            this.buttonPerfil.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.buttonPerfil.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(68)))), ((int)(((byte)(78)))));
+            this.buttonPerfil.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonPerfil.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonPerfil.Font = new System.Drawing.Font("Source Code Pro Black", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonPerfil.ForeColor = System.Drawing.Color.White;
+            this.buttonPerfil.Image = ((System.Drawing.Image)(resources.GetObject("buttonPerfil.Image")));
+            this.buttonPerfil.Location = new System.Drawing.Point(894, 59);
+            this.buttonPerfil.Name = "buttonPerfil";
+            this.buttonPerfil.Size = new System.Drawing.Size(188, 72);
+            this.buttonPerfil.TabIndex = 40;
+            this.buttonPerfil.Text = "Perfil Admin";
+            this.buttonPerfil.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.buttonPerfil.UseVisualStyleBackColor = false;
+            this.buttonPerfil.Click += new System.EventHandler(this.buttonPerfil_Click);
+            // 
+            // timerCargando
+            // 
+            this.timerCargando.Interval = 2000;
+            this.timerCargando.Tick += new System.EventHandler(this.timerCargando_Tick);
+            // 
             // FormGestion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(106)))), ((int)(((byte)(122)))));
             this.ClientSize = new System.Drawing.Size(1600, 915);
+            this.Controls.Add(this.buttonPerfil);
             this.Controls.Add(this.checkBoxActivo);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.label14);
@@ -521,5 +582,7 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.CheckBox checkBoxActivo;
+        private System.Windows.Forms.Button buttonPerfil;
+        private System.Windows.Forms.Timer timerCargando;
     }
 }

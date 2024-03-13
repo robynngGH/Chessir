@@ -1,18 +1,13 @@
 ﻿using MySqlConnector;
 using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Chessir.dao
 {
     internal class ConexionDB
     {
-        MySqlConnection conexion = new MySqlConnection();
-        static string servidor = ""; //data removed for security reasons (hi github)
+        MySqlConnection conexion = new MySqlConnection(); //deleted info for security reasons (hi github)
+        static string servidor = "";
         static string db = "";
         static string usuario = "";
         static string password = "";

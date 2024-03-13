@@ -1,13 +1,6 @@
 ﻿using Chessir.gui;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Chessir
@@ -17,18 +10,24 @@ namespace Chessir
         //variables que se reciben de la pantalla de login
         private string username;
         private Boolean es_admin = false; //determina si se tienen permisos especiales
-        private int id_usuario = 0;
+        private int id_usuario = 0; private int id_partida = 0;
 
         public string getUsername() { return username; }
+        public int getId() { return id_usuario; }
 
         //datos a enviar a formJugar
         private string username_Negro = "";
         private int id_Negro = 0, tiempo = 0, incremento = 0;
+        public string getUsernameNegro() { return username_Negro; }
+        public int getIdNegro() { return id_Negro; }
+        public int getTiempo() { return tiempo; }
+        public int getIncremento() { return incremento; }
+        public int getIDPartida() { return id_partida; }
         public FormInicial()
         {
             InitializeComponent();
             this.Show();
-            FormLogin formLogin =  new FormLogin();
+            FormLogin formLogin = new FormLogin();
             formLogin.ShowDialog();
 
         }
@@ -59,8 +58,9 @@ namespace Chessir
         }
 
         //función que asigna el usuario al jugador negro, si es admin o no y recibe su ID
-        public void recibirDatosPartida(string username_Negro, int id_Negro, int tiempo, int incremento)
+        public void recibirDatosPartida(int id_partida, string username_Negro, int id_Negro, int tiempo, int incremento)
         {
+            this.id_partida = id_partida;
             this.username_Negro = username_Negro;
             this.id_Negro = id_Negro;
             this.tiempo = tiempo; this.incremento = incremento;
@@ -97,20 +97,6 @@ namespace Chessir
             Application.Exit();
         }
 
-        private void pictureBoxMaximizar_Click(object sender, EventArgs e)
-        {
-            this.WindowState = FormWindowState.Maximized;
-            pictureBoxMaximizar.Visible = false;
-            pictureBoxRestaurar.Visible = true;
-        }
-
-        private void pictureBoxRestaurar_Click(object sender, EventArgs e)
-        {
-            this.WindowState = FormWindowState.Normal;
-            pictureBoxMaximizar.Visible = true;
-            pictureBoxRestaurar.Visible = false;
-        }
-
         private void pictureBoxMinimizar_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
@@ -128,7 +114,37 @@ namespace Chessir
 
         private void buttonRepeticiones_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Función por implementar.", "No disponible", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            abrirFormEnPanel(new FormInformes(es_admin));
+        }
+
+        private void buttonPerfil_Click(object sender, EventArgs e)
+        {
+            Cursor = Cursors.AppStarting;
+            timerCargando.Start();
+            abrirFormEnPanel(new FormPerfil(id_usuario, username));
+        }
+
+        private void timerCargando_Tick(object sender, EventArgs e)
+        {
+            timerCargando.Start();
+            Cursor = Cursors.Default;
+        }
+
+        private void buttonGenerarPartidasID_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonCerrarSesion_Click(object sender, EventArgs e)
+        {
+            DialogResult resultado = MessageBox.Show("¿Desea cerrar sesión?",
+                "Cerrar sesión", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (resultado == DialogResult.Yes)
+            {
+                Application.Restart();
+                Environment.Exit(0);
+            }
         }
 
         private void buttonSalir_Click(object sender, EventArgs e)
@@ -145,7 +161,7 @@ namespace Chessir
             FormJugarInicio formJI = new FormJugarInicio();
             formJI.ShowDialog();
             if (!formJI.getCierre())
-                abrirFormEnPanel(new FormJugar(id_usuario, username, id_Negro, username_Negro, tiempo, incremento));
+                abrirFormEnPanel(new FormJugar(id_partida, id_usuario, username, id_Negro, username_Negro, tiempo, incremento));
         }
     }
 }

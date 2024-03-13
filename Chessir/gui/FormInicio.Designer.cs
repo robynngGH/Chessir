@@ -34,6 +34,7 @@
             this.labelDiaSemana = new System.Windows.Forms.Label();
             this.labelDiaActual = new System.Windows.Forms.Label();
             this.labelUsuario = new System.Windows.Forms.Label();
+            this.buttonAyuda = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -87,8 +88,26 @@
             this.labelUsuario.ForeColor = System.Drawing.Color.White;
             this.labelUsuario.Location = new System.Drawing.Point(1077, 163);
             this.labelUsuario.Name = "labelUsuario";
-            this.labelUsuario.Size = new System.Drawing.Size(455, 281);
+            this.labelUsuario.Size = new System.Drawing.Size(455, 246);
             this.labelUsuario.TabIndex = 12;
+            // 
+            // buttonAyuda
+            // 
+            this.buttonAyuda.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.buttonAyuda.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(68)))), ((int)(((byte)(78)))));
+            this.buttonAyuda.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonAyuda.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonAyuda.Font = new System.Drawing.Font("Source Code Pro Black", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonAyuda.ForeColor = System.Drawing.Color.White;
+            this.buttonAyuda.Image = ((System.Drawing.Image)(resources.GetObject("buttonAyuda.Image")));
+            this.buttonAyuda.Location = new System.Drawing.Point(226, 361);
+            this.buttonAyuda.Name = "buttonAyuda";
+            this.buttonAyuda.Size = new System.Drawing.Size(195, 112);
+            this.buttonAyuda.TabIndex = 23;
+            this.buttonAyuda.Text = "Ayuda";
+            this.buttonAyuda.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.buttonAyuda.UseVisualStyleBackColor = false;
+            this.buttonAyuda.Click += new System.EventHandler(this.buttonAyuda_Click);
             // 
             // FormInicio
             // 
@@ -96,6 +115,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(106)))), ((int)(((byte)(122)))));
             this.ClientSize = new System.Drawing.Size(1600, 915);
+            this.Controls.Add(this.buttonAyuda);
             this.Controls.Add(this.labelUsuario);
             this.Controls.Add(this.labelDiaActual);
             this.Controls.Add(this.labelDiaSemana);
@@ -117,5 +137,6 @@
         private System.Windows.Forms.Label labelDiaSemana;
         private System.Windows.Forms.Label labelDiaActual;
         private System.Windows.Forms.Label labelUsuario;
+        private System.Windows.Forms.Button buttonAyuda;
     }
 }

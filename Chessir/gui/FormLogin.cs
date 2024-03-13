@@ -1,16 +1,9 @@
 ﻿using Chessir.dao;
 using Chessir.dto;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace Chessir.gui
 {
@@ -40,6 +33,7 @@ namespace Chessir.gui
         {
             DTOUsuario dtoUsuario = new DTOUsuario();
             DAOUsuario daoUsuario = new DAOUsuario();
+            DAOLog daoLog = new DAOLog(); //para registrar el acceso
 
             int resultado = daoUsuario.comprobarLogin(textBoxUsername.Text, textBoxPassword.Text); //recibimos el tipo de login
 
@@ -54,6 +48,8 @@ namespace Chessir.gui
                 if (formInicial != null)
                     formInicial.recibirDatosDeLogin(textBoxUsername.Text, true, id_usuario); //pasa los datos de login con admin al FormInicial
 
+                daoLog.registrarLog(id_usuario, true); //registra el log
+
                 this.Hide(); //cierra el form de login
 
             }
@@ -66,6 +62,8 @@ namespace Chessir.gui
 
                 if (formInicial != null)
                     formInicial.recibirDatosDeLogin(textBoxUsername.Text, false, id_usuario); //pasa los datos de login sin privilegios al FormInicial
+
+                daoLog.registrarLog(id_usuario, true);
 
                 this.Hide(); //cierra el form de login
             }

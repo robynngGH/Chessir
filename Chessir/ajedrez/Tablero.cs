@@ -1,10 +1,5 @@
 ﻿using Chessir.gui;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization.Formatters;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Chessir.ajedrez
 {
@@ -21,9 +16,9 @@ namespace Chessir.ajedrez
             Window = formJugar;
             byte filas = 0;
 
-            for (byte x = 0;x<8;x++, filas++)
+            for (byte x = 0; x < 8; x++, filas++)
             {
-                for (byte y = 0;y<8;y++, filas++)
+                for (byte y = 0; y < 8; y++, filas++)
                 {
                     //casilla par será blanca e impar negra
                     Tile casillaCorrecta() => filas % 2 == 0 ? new Tile(y, x, ColorPieza.BLANCO) : new Tile(y, x, ColorPieza.NEGRO);
@@ -35,8 +30,8 @@ namespace Chessir.ajedrez
             ponerPiezas(0, ColorPieza.NEGRO); //arriba estarán las piezas negras
             ponerPiezas(7, ColorPieza.BLANCO); //abajo las blancas
 
-            for (int x = 0;x<8;x++)
-                for (int y = 0;y<8;y++)
+            for (int x = 0; x < 8; x++)
+                for (int y = 0; y < 8; y++)
                 {
                     if (casillas[y, x].pieza.tipopieza != TipoPieza.Vacio)
                         casillas[y, x].ImagenPieza.BackgroundImage = Tile.ImagenesPiezas[casillas[y, x].pieza.getNombreImagen()];
@@ -45,10 +40,10 @@ namespace Chessir.ajedrez
 
         public static Tile getCasilla(TipoPieza tipoPieza, ColorPieza color)
         {
-            for (byte x=0;x<8;x++)
-                for (byte y=0;y<8;y++)
+            for (byte x = 0; x < 8; x++)
+                for (byte y = 0; y < 8; y++)
                 {
-                    if(getPieza(y, x).tipopieza == tipoPieza && getPieza(y, x).color == color)
+                    if (getPieza(y, x).tipopieza == tipoPieza && getPieza(y, x).color == color)
                         return casillas[y, x];
                 }
             return null;
@@ -57,9 +52,9 @@ namespace Chessir.ajedrez
         public static List<Tile> getCasillasConPiezas(ColorPieza color)
         {
             List<Tile> resultadoCasillas = new List<Tile>();
-            for (int x = 0;x<8;x++)
-                for (int y = 0;y<8;y++)
-                    if(getPieza(y, x).color == color)
+            for (int x = 0; x < 8; x++)
+                for (int y = 0; y < 8; y++)
+                    if (getPieza(y, x).color == color)
                         resultadoCasillas.Add(casillas[y, x]);
             return resultadoCasillas;
         }
@@ -89,7 +84,7 @@ namespace Chessir.ajedrez
     {
         public Pieza piezaDerrotada { get; private set; }
         public MovimientoDePieza movimiento { get; private set; }
-        public Pieza pieza {  get; private set; }
+        public Pieza pieza { get; private set; }
         public Localizacion localizacionAnterior { get; private set; }
         public int movimientoIndex;
         public TableroAnterior(Pieza pieza, int movimientoIndex, Localizacion localizacionAnterior, MovimientoDePieza movimiento)
@@ -100,7 +95,7 @@ namespace Chessir.ajedrez
             piezaDerrotada = new Pieza(TipoPieza.Vacio);
             this.movimiento = movimiento;
         }
-        public TableroAnterior(Pieza pieza, Localizacion localizacion, MovimientoDePieza movimiento, Pieza piezaDerrotada, int movimientoIndex) :this(pieza, movimientoIndex, localizacion, movimiento)
+        public TableroAnterior(Pieza pieza, Localizacion localizacion, MovimientoDePieza movimiento, Pieza piezaDerrotada, int movimientoIndex) : this(pieza, movimientoIndex, localizacion, movimiento)
         {
             this.piezaDerrotada = piezaDerrotada;
         }

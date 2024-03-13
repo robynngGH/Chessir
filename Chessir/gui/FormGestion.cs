@@ -2,20 +2,14 @@
 using Chessir.dto;
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Chessir.gui
 {
     public partial class FormGestion : Form
     {
+        FormInicial fi = Application.OpenForms.OfType<FormInicial>().FirstOrDefault(); //para llamar a funciones del form que abarca todo
         private int id_usuario = 0;
         public FormGestion(int id_usuario)
         {
@@ -166,7 +160,7 @@ namespace Chessir.gui
                 textBoxRepitePasswordModificar.Enabled = false; checkBoxEsAdminModificar.Enabled = false;
                 buttonModificarUsuario.Enabled = false;
             }
-                
+
         }
 
         private void textBoxUsernameModificar_TextChanged(object sender, EventArgs e)
@@ -301,6 +295,19 @@ namespace Chessir.gui
                 DAOUsuario daoUsuario = new DAOUsuario();
                 daoUsuario.cambiarActividadUsuario(comboBoxUsuariosEliminar.Text, checkBoxActivo.Checked, id_usuario);
             }
+        }
+
+        private void buttonPerfil_Click(object sender, EventArgs e)
+        {
+            Cursor = Cursors.AppStarting;
+            timerCargando.Start();
+            fi.abrirFormEnPanel(new FormPerfil(id_usuario, fi.getUsername()));
+        }
+
+        private void timerCargando_Tick(object sender, EventArgs e)
+        {
+            timerCargando.Start();
+            Cursor = Cursors.Default;
         }
     }
 }

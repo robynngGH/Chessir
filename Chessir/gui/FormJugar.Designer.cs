@@ -30,6 +30,9 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormJugar));
             this.panelLateral = new System.Windows.Forms.Panel();
+            this.buttonTablas = new System.Windows.Forms.Button();
+            this.buttonRendirseN = new System.Windows.Forms.Button();
+            this.buttonRendirseB = new System.Windows.Forms.Button();
             this.labelEstadoPartida = new System.Windows.Forms.Label();
             this.labelTurno = new System.Windows.Forms.Label();
             this.timerNegro = new CuentaAtras.CuentaAtras();
@@ -40,8 +43,6 @@
             this.groupBoxFichasDerrotadasN = new System.Windows.Forms.GroupBox();
             this.labelJugadorBlanco = new System.Windows.Forms.Label();
             this.labelJugadorNegro = new System.Windows.Forms.Label();
-            this.buttonRendirseB = new System.Windows.Forms.Button();
-            this.buttonRendirseN = new System.Windows.Forms.Button();
             this.panelLateral.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTimerN)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTimerB)).BeginInit();
@@ -50,6 +51,7 @@
             // panelLateral
             // 
             this.panelLateral.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(68)))), ((int)(((byte)(78)))));
+            this.panelLateral.Controls.Add(this.buttonTablas);
             this.panelLateral.Controls.Add(this.buttonRendirseN);
             this.panelLateral.Controls.Add(this.buttonRendirseB);
             this.panelLateral.Controls.Add(this.labelEstadoPartida);
@@ -68,12 +70,55 @@
             this.panelLateral.Size = new System.Drawing.Size(340, 715);
             this.panelLateral.TabIndex = 0;
             // 
+            // buttonTablas
+            // 
+            this.buttonTablas.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(106)))), ((int)(((byte)(122)))));
+            this.buttonTablas.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonTablas.Font = new System.Drawing.Font("Nirmala UI", 7.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonTablas.ForeColor = System.Drawing.Color.White;
+            this.buttonTablas.Location = new System.Drawing.Point(212, 332);
+            this.buttonTablas.Name = "buttonTablas";
+            this.buttonTablas.Size = new System.Drawing.Size(83, 41);
+            this.buttonTablas.TabIndex = 18;
+            this.buttonTablas.Text = "Tablas";
+            this.buttonTablas.UseVisualStyleBackColor = false;
+            this.buttonTablas.Click += new System.EventHandler(this.buttonTablas_Click);
+            // 
+            // buttonRendirseN
+            // 
+            this.buttonRendirseN.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(106)))), ((int)(((byte)(122)))));
+            this.buttonRendirseN.Enabled = false;
+            this.buttonRendirseN.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonRendirseN.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonRendirseN.ForeColor = System.Drawing.Color.White;
+            this.buttonRendirseN.Location = new System.Drawing.Point(196, 230);
+            this.buttonRendirseN.Name = "buttonRendirseN";
+            this.buttonRendirseN.Size = new System.Drawing.Size(99, 45);
+            this.buttonRendirseN.TabIndex = 17;
+            this.buttonRendirseN.Text = "Rendirse";
+            this.buttonRendirseN.UseVisualStyleBackColor = false;
+            this.buttonRendirseN.Click += new System.EventHandler(this.buttonRendirseN_Click);
+            // 
+            // buttonRendirseB
+            // 
+            this.buttonRendirseB.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(106)))), ((int)(((byte)(122)))));
+            this.buttonRendirseB.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonRendirseB.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonRendirseB.ForeColor = System.Drawing.Color.White;
+            this.buttonRendirseB.Location = new System.Drawing.Point(196, 436);
+            this.buttonRendirseB.Name = "buttonRendirseB";
+            this.buttonRendirseB.Size = new System.Drawing.Size(99, 45);
+            this.buttonRendirseB.TabIndex = 16;
+            this.buttonRendirseB.Text = "Rendirse";
+            this.buttonRendirseB.UseVisualStyleBackColor = false;
+            this.buttonRendirseB.Click += new System.EventHandler(this.buttonRendirseB_Click);
+            // 
             // labelEstadoPartida
             // 
             this.labelEstadoPartida.AutoSize = true;
             this.labelEstadoPartida.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelEstadoPartida.ForeColor = System.Drawing.Color.OliveDrab;
-            this.labelEstadoPartida.Location = new System.Drawing.Point(130, 372);
+            this.labelEstadoPartida.Location = new System.Drawing.Point(50, 371);
             this.labelEstadoPartida.Name = "labelEstadoPartida";
             this.labelEstadoPartida.Size = new System.Drawing.Size(65, 19);
             this.labelEstadoPartida.TabIndex = 9;
@@ -85,11 +130,11 @@
             this.labelTurno.AutoSize = true;
             this.labelTurno.Font = new System.Drawing.Font("Source Code Pro Black", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelTurno.ForeColor = System.Drawing.Color.White;
-            this.labelTurno.Location = new System.Drawing.Point(119, 322);
+            this.labelTurno.Location = new System.Drawing.Point(48, 313);
             this.labelTurno.Name = "labelTurno";
-            this.labelTurno.Size = new System.Drawing.Size(89, 32);
+            this.labelTurno.Size = new System.Drawing.Size(119, 32);
             this.labelTurno.TabIndex = 8;
-            this.labelTurno.Text = "Turno";
+            this.labelTurno.Text = "Turno 1";
             this.labelTurno.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // timerNegro
@@ -184,35 +229,6 @@
             this.labelJugadorNegro.TabIndex = 0;
             this.labelJugadorNegro.Text = "Jugador Negro";
             // 
-            // buttonRendirseB
-            // 
-            this.buttonRendirseB.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(106)))), ((int)(((byte)(122)))));
-            this.buttonRendirseB.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonRendirseB.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonRendirseB.ForeColor = System.Drawing.Color.White;
-            this.buttonRendirseB.Location = new System.Drawing.Point(196, 436);
-            this.buttonRendirseB.Name = "buttonRendirseB";
-            this.buttonRendirseB.Size = new System.Drawing.Size(99, 45);
-            this.buttonRendirseB.TabIndex = 16;
-            this.buttonRendirseB.Text = "Rendirse";
-            this.buttonRendirseB.UseVisualStyleBackColor = false;
-            this.buttonRendirseB.Click += new System.EventHandler(this.buttonRendirseB_Click);
-            // 
-            // buttonRendirseN
-            // 
-            this.buttonRendirseN.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(106)))), ((int)(((byte)(122)))));
-            this.buttonRendirseN.Enabled = false;
-            this.buttonRendirseN.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonRendirseN.Font = new System.Drawing.Font("Nirmala UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonRendirseN.ForeColor = System.Drawing.Color.White;
-            this.buttonRendirseN.Location = new System.Drawing.Point(196, 230);
-            this.buttonRendirseN.Name = "buttonRendirseN";
-            this.buttonRendirseN.Size = new System.Drawing.Size(99, 45);
-            this.buttonRendirseN.TabIndex = 17;
-            this.buttonRendirseN.Text = "Rendirse";
-            this.buttonRendirseN.UseVisualStyleBackColor = false;
-            this.buttonRendirseN.Click += new System.EventHandler(this.buttonRendirseN_Click);
-            // 
             // FormJugar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -242,11 +258,12 @@
         private System.Windows.Forms.GroupBox groupBoxFichasDerrotadasN;
         private System.Windows.Forms.PictureBox pictureBoxTimerN;
         private System.Windows.Forms.PictureBox pictureBoxTimerB;
-        private System.Windows.Forms.Label labelTurno;
         public System.Windows.Forms.Label labelEstadoPartida;
         public CuentaAtras.CuentaAtras timerNegro;
         public CuentaAtras.CuentaAtras timerBlanco;
         public System.Windows.Forms.Button buttonRendirseN;
         public System.Windows.Forms.Button buttonRendirseB;
+        public System.Windows.Forms.Label labelTurno;
+        public System.Windows.Forms.Button buttonTablas;
     }
 }

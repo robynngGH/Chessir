@@ -122,6 +122,7 @@
             this.buttonNuevaPartida.TabIndex = 17;
             this.buttonNuevaPartida.Text = "Nueva Partida";
             this.buttonNuevaPartida.UseVisualStyleBackColor = false;
+            this.buttonNuevaPartida.Click += new System.EventHandler(this.buttonNuevaPartida_Click);
             // 
             // buttonRevancha
             // 

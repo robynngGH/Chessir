@@ -12,6 +12,8 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -33,6 +35,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BCrypt.Net-Next, Version=4.0.3.0, Culture=neutral, PublicKeyToken=1e11be04b6288443, processorArchitecture=MSIL">
+      <HintPath>packages\BCrypt.Net-Next.4.0.3\lib\net472\BCrypt.Net-Next.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="CuentaAtras">
       <HintPath>..\CuentaAtras\bin\Debug\CuentaAtras.dll</HintPath>
     </Reference>
@@ -87,6 +96,8 @@
       <HintPath>packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -111,8 +122,20 @@
       <DependentUpon>Tile.cs</DependentUpon>
     </Compile>
     <Compile Include="dao\ConexionDB.cs" />
+    <Compile Include="dao\DAOEstadistica.cs" />
+    <Compile Include="dao\DAOLog.cs" />
+    <Compile Include="dao\DAOPartida.cs" />
+    <Compile Include="dao\DAOTurno.cs" />
     <Compile Include="dao\DAOUsuario.cs" />
+    <Compile Include="dto\DTOPartida.cs" />
+    <Compile Include="dto\DTOTurno.cs" />
     <Compile Include="dto\DTOUsuario.cs" />
+    <Compile Include="gui\FormAyuda.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="gui\FormAyuda.Designer.cs">
+      <DependentUpon>FormAyuda.cs</DependentUpon>
+    </Compile>
     <Compile Include="gui\FormFinalPartida.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -124,6 +147,12 @@
     </Compile>
     <Compile Include="gui\FormGestion.Designer.cs">
       <DependentUpon>FormGestion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="gui\FormInformes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="gui\FormInformes.Designer.cs">
+      <DependentUpon>FormInformes.cs</DependentUpon>
     </Compile>
     <Compile Include="gui\FormInicial.cs">
       <SubType>Form</SubType>
@@ -155,22 +184,58 @@
     <Compile Include="gui\FormLogin.Designer.cs">
       <DependentUpon>FormLogin.cs</DependentUpon>
     </Compile>
+    <Compile Include="gui\FormPerfil.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="gui\FormPerfil.Designer.cs">
+      <DependentUpon>FormPerfil.cs</DependentUpon>
+    </Compile>
     <Compile Include="gui\FormSeleccionPieza.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="gui\FormSeleccionPieza.Designer.cs">
       <DependentUpon>FormSeleccionPieza.cs</DependentUpon>
     </Compile>
+    <Compile Include="informes\informeAccesos.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>informeAccesos.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="informes\informeEstadisticas.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>informeEstadisticas.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="informes\informePartidasUsuario.cs">
+      <DependentUpon>informePartidasUsuario.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="informes\informePartidasID.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>informePartidasID.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="ajedrez\Tile.resx">
       <DependentUpon>Tile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="gui\FormAyuda.resx">
+      <DependentUpon>FormAyuda.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="gui\FormFinalPartida.resx">
       <DependentUpon>FormFinalPartida.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="gui\FormGestion.resx">
       <DependentUpon>FormGestion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="gui\FormInformes.resx">
+      <DependentUpon>FormInformes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="gui\FormInicial.resx">
       <DependentUpon>FormInicial.cs</DependentUpon>
@@ -187,8 +252,27 @@
     <EmbeddedResource Include="gui\FormLogin.resx">
       <DependentUpon>FormLogin.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="gui\FormPerfil.resx">
+      <DependentUpon>FormPerfil.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="gui\FormSeleccionPieza.resx">
       <DependentUpon>FormSeleccionPieza.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="informes\informeAccesos.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>informeAccesos.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="informes\informeEstadisticas.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>informeEstadisticas.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="informes\informePartidasUsuario.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>informePartidasUsuario.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="informes\informePartidasID.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>informePartidasID.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -252,6 +336,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\NTorre.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tablas.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
